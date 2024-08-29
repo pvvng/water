@@ -35,17 +35,9 @@
     outline: none;
     border: none;
     cursor: pointer;
-    transition: all 0.3s;
 }
 #sendButton svg {
     height: 18px;
-    transition: all 0.3s;
 }
-#sendButton svg path {
-    transition: all 0.3s;
-}
-#sendButton:hover svg path {
-    fill: #3c3c3c;
-    stroke: white;
-}
+
   

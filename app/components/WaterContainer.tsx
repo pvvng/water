@@ -5,6 +5,7 @@ import './css/water.css';
 
 export default function WaterContainer(){
     let [count, setCount] = useState(0);
+
     return(
         <div className='w-100 h-50 container d-flex flex-center'>
             <div>
@@ -22,7 +23,7 @@ export default function WaterContainer(){
                             <h4 className='fw-bold'>{count}%</h4>
                             <button className='btn btn-dark' onClick={() => {
                                 if(count < 100) setCount(pre => pre + 1);
-                                else { alert('물이 가득찼음요') }
+                                else { alert('물이 가득참') }
                             }}>물 붓기</button>
                         </div>
                     </div>
