@@ -6,7 +6,7 @@ export default async function handler (
     req: NextApiRequest, res: NextApiResponseServerIO
 ){
     if (req.method === "POST") {
-        const message :string = req.body.text;
+        const message :number = req.body.water;
         res.socket.server.io.emit("msg", message);
         res.status(201).json(message);
     }

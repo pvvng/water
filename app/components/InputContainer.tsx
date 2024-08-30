@@ -8,7 +8,7 @@ export default function InputContainer(){
 
     return(
         /* From Uiverse.io by vinodjangid07 */ 
-        <div className="messageBox w-100">
+        <div className="messageBox w-100" style={{maxWidth : 768}}>
             <input 
                 className="col-10" 
                 ref = {inputRef}

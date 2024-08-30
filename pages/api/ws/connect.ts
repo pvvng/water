@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponseServerIO) => {
       // path는 클라이언트, 서버 간의 ws 연결을 위한 경로 지정. 
       // 클라이언트는 이 경로를 통해 ws 서버에 연결함
       const io = new ServerIO(httpServer, {
-          path: "/api/comment/websocket",
+          path: "/api/ws/connect",
       });
 
       // 생성한 Socket.IO 서버를 res.socket.server의 io 속성에 저장

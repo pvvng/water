@@ -3,33 +3,35 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
+export interface textStateType {
+    message : string;
+    time : string;
+};
+
 export default function useWebsocket(){
-    let [textStateArr, setTextStateArr] = useState<string[]>([]);
-
-    /** 6개 이상이면 지우기 */
-    useEffect(() => {
-        if(textStateArr.length > 6){
-            while (textStateArr.length > 6){
-                textStateArr.shift();
-            }
-        }
-    },[textStateArr])
+    let [textStateArr, setTextStateArr] = useState<textStateType[]>([]);
 
     useEffect(() => {
-        const socket = io({ path: "/api/comment/websocket" });
+        const socket = io({ path: "/api/ws/connect" });
 
         socket.on('connect', () => {
             console.log('WS server was connected');
-        })
+        });
 
         socket.on('msg', (data) => {
-            setTextStateArr(preArr => [...preArr, data]);
-        })
+            setTextStateArr(preArr => {
+                const updatedArr = [...preArr, data];
+                if (updatedArr.length > 6) {
+                    updatedArr.shift(); // 배열 길이를 6개로 유지
+                }
+                return updatedArr;
+            });
+        });
 
         return () => {
             socket.disconnect();
         };
-    },[])
+    }, []);
 
-    return { textStateArr };
+    return { textStateArr, setTextStateArr };
 }

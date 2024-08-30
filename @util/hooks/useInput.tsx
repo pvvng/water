@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useEffect, useRef } from "react"
+import getTime from "../functions/getTime";
 
 export default function useInput(){
 
@@ -19,12 +20,17 @@ export default function useInput(){
         if (inputRef.current) {
             let inputValue = inputRef.current.value;
             if(inputValue){
-                let res = await axios.post(
-                    '/api/comment/input', 
-                    { text : inputValue }
-                );
+                if(inputValue.length > 18) alert('18자까지만 입력가능합니다.');
+                else{
+                    // 날짜, 시간 받아오기
+                    const { date, time } = getTime();
+                    let res = await axios.post(
+                        '/api/ws/input', 
+                        { text : inputValue, date : date, time : time }
+                    );
+                }
                 inputRef.current.value = '';
-            }else{ alert ('한 자라도 적는 성의를 보이세요') }
+            }else{ alert ('한 자라도 적는 성의를 보이세요'); }
         }
     };
 

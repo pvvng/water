@@ -22,8 +22,9 @@ export default function WaterContainer(){
                         <div className='text-center'>
                             <h4 className='fw-bold'>{count}%</h4>
                             <button className='btn btn-dark' onClick={() => {
-                                if(count < 100) setCount(pre => pre + 1);
-                                else { alert('물이 가득참') }
+                                if(count < 100) {
+                                    setCount(pre => pre + 1);
+                                }else { alert('물이 가득참') }
                             }}>물 붓기</button>
                         </div>
                     </div>
