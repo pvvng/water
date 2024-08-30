@@ -4,13 +4,34 @@
     width: 200px;
     height: 250px;
     border: 5px solid;
+    border-top: 0px;
     z-index: 1;
+    overflow: hidden;
 }
 
-.water {
+.wave {
+    opacity: .4;
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    background: #0af;
     z-index: -1;
-    background: #00aaff;
+    top: 250px;
+    width: 400px;
+    height: 500px;
+    border-radius: 43%;
+    animation: drift 5s infinite linear;
+}
+
+.wave.-three {
+    animation: drift 7s infinite linear;
+}
+  
+.wave.-two {
+    animation: drift 9s infinite linear;
+    opacity: .1;
+    /* background: yellow; */
+}
+
+@keyframes drift {
+    from { transform: rotate(0deg); }
+    from { transform: rotate(360deg); }
 }

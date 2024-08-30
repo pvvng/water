@@ -24,10 +24,15 @@ export default function useInput(){
                 else{
                     // 날짜, 시간 받아오기
                     const { date, time } = getTime();
-                    let res = await axios.post(
-                        '/api/ws/input', 
+                    let wsCommentPromise = axios.post(
+                        '/api/ws/comment',
+                        { text : inputValue, time : time }
+                    );
+                    let postCommentPromise = axios.post(
+                        '/api/post/comment', 
                         { text : inputValue, date : date, time : time }
                     );
+                    let result = await Promise.all([wsCommentPromise, postCommentPromise]);
                 }
                 inputRef.current.value = '';
             }else{ alert ('한 자라도 적는 성의를 보이세요'); }

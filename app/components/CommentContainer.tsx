@@ -26,7 +26,6 @@ export default function CommentContainer(){
             textStateArr.shift();
         }
     }
-    console.log(textStateArr)
 
     return(
         <div className='container' style={{position : 'relative'}}>

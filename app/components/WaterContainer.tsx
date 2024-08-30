@@ -1,10 +1,25 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './css/water.css';
+import axios from 'axios';
+import getCount, { DataType } from '@/@util/functions/getCount';
+import convertPercentageToValue from '@/@util/functions/convertPercentageToValue';
+import useEventSource from '@/@util/hooks/useEventSource';
 
 export default function WaterContainer(){
-    let [count, setCount] = useState(0);
+
+    let [data, setData] = useState<DataType|undefined>(undefined)
+    
+    // DB SSE 연결
+    useEventSource(setData);
+
+    // data 변경 될때마다 position top 변경하기
+    useEffect(() => {
+        if(data){
+            convertPercentageToValue(data?.count);
+        }
+    },[data])
 
     return(
         <div className='w-100 h-50 container d-flex flex-center'>
@@ -15,19 +30,31 @@ export default function WaterContainer(){
                     style={{margin : 'auto'}}
                 >
                     <div className="glass d-flex flex-center">
-                        <div 
-                            className="water" 
-                            style={{height : count + '%'}}
-                        ></div>
                         <div className='text-center'>
-                            <h4 className='fw-bold'>{count}%</h4>
+                            <h4 className='fw-bold'>
+                                {data ? data.count : 0}%
+                            </h4>
                             <button className='btn btn-dark' onClick={() => {
-                                if(count < 100) {
-                                    setCount(pre => pre + 1);
-                                }else { alert('물이 가득참') }
+                                if(!data) alert ('로딩중임');
+                                else if(data.count < 100) {
+                                    axios.patch(
+                                        '/api/update/water', 
+                                        { id : data._id, count : data.count }
+                                    );
+                                }else { alert('오늘은 이미 물이 가득참') }
                             }}>물 붓기</button>
                         </div>
+                        {
+                            data &&
+                            <>
+                                <div className='wave -one'></div>
+                                <div className='wave -two'></div>
+                                <div className='wave -three'></div>
+                            </>
+                        }
+
                     </div>
+
                 </div>
             </div>
         </div>
