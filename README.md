@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [물을 붓자](http://water.ap-northeast-2.elasticbeanstalk.com/)
 
-## Getting Started
+### 개발 기간
+2024-08-28 ~ 2024-08-31
 
-First, run the development server:
+### 개발 목적
+Websocket, SSE(MongoDB Change Stream) 지식 습득
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 개발 환경
+Next.js, MongoDB, socket.io, AWS elastic beanstalk
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 사용 방법
+1. 물 붓기 버튼을 눌러 컵에 물을 부을 수 있습니다. (SSE 활용)
+2. 댓글을 작성하면 즉각적으로 이를 확인할 수 있습니다. (WS 활용)
+3. 웹에 최초로 접속하면 DB에 저장된 댓글과 물 퍼센티지를 확인할 수 있습니다.
+4. 물이 다 차면 (100%) 더 이상 물을 부을 수 없습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 특이 사항
+1. Netlify 는 서버리스 플랫폼이어서 WS, SSE가 제대로 동작하지 않는 문제가 있었다. 이를 해결하기 위해 AWS elastic beanstalk로 배포를 진행했습니다.
+2. Node.js 서버를 따로 사용하지 않고, Next.js API Route만을 이용하여 백엔드를 구축하였습니다. 
