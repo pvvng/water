@@ -5,6 +5,7 @@ import InputContainer from "./InputContainer";
 import useWebsocket from '@/@util/hooks/useWebsocket';
 import getComment from '@/@util/functions/getComment';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 export default function CommentContainer(){
     
@@ -17,9 +18,12 @@ export default function CommentContainer(){
         enabled : textStateArr.length === 0 
     }) 
 
-    if(textStateArr.length === 0 && data){
-        setTextStateArr([...data]);
-    }
+    useEffect(() => {
+        if(textStateArr.length === 0 && data){
+            setTextStateArr([...data]);
+        }
+    },[data])
+    
     /** 6개 이상이면 지우기 */
     if(textStateArr.length > 6){
         while (textStateArr.length > 6){

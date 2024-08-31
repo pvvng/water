@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import './css/water.css';
 import axios from 'axios';
-import getCount, { DataType } from '@/@util/functions/getCount';
+import { DataType } from '@/@util/functions/getCount';
 import convertPercentageToValue from '@/@util/functions/convertPercentageToValue';
 import useEventSource from '@/@util/hooks/useEventSource';
 
